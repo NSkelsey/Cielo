@@ -93,7 +93,7 @@ def run_play(ip_addr):
     inventory = Inventory(loader=loader, variable_manager=variable_manager, host_list=hosts.name)
     variable_manager.set_inventory(inventory)
 
-    tasks = loader.load_from_file('gl_install_task.yml')
+    tasks = loader.load_from_file('playbooks/gl_install_task.yml')
 
     play_source =  dict(
         name = "manual play exec",

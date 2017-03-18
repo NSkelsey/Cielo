@@ -1,0 +1,15 @@
+---
+- tasks:
+  service: 
+    name: globaleaks
+    state: started
+    enabled: yes
+    become_user: root
+    become: true
+
+  service:
+    name: tor
+    state: started
+    enabled: yes
+    become_user: root
+    become: true
