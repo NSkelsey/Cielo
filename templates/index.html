@@ -1,0 +1,50 @@
+{% macro render_field(field) %}
+<dt>{{ field.label }}
+<dd>{{ field(**kwargs)|safe }}
+{% if field.errors %}
+  <ul class=errors>
+    {% for error in field.errors %}
+    <li>{{ error }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+</dd>
+{% endmacro %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hermes Node Creator</title>
+  </head>
+  <body>
+    <h1>Create an instance</h1>
+    <form method=post>
+      <dl>
+        {{ render_field(reg_form.hostname) }}
+        {{ render_field(reg_form.username) }}
+        {{ render_field(reg_form.email) }}
+        {{ render_field(reg_form.accept_tos) }}
+      </dl>
+      <p><input type=submit value=Register></p>
+    </form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    <hr/>
+    <h1>Existing instances</h1>
+    <div>
+      {% for ins in instances %}
+      <div class='instance-status'>
+        <p>{{ ins.public_dns_name }} - {{ ins.public_ip_address }} - {{ ins.state }} - {{ ins.id }}</p>
+        <code>ssh -i ~/.ssh/gl-qual-ass-eu.pem ubuntu@{{ ins.public_ip_address }}</code>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
+
