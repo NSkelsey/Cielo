@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+      <h1>Login</h1>
+      <form method=post>
+      {% from "macros.html" import render_field %}
+      <dl>
+        {{ render_field(form.username) }}
+        {{ render_field(form.passphrase) }}
+      </dl>
+      <p><input type=submit value=Login></p>
+    </form>
+    {% from "macros.html" import show_messages %}
+    {{ show_messages() }}
+    <p><b>{{ current_user }}</b></p>
+   </body>
+</html>
+
